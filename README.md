@@ -25,30 +25,30 @@ TBC
 ```
 
 
-## Set Workspace Variables
+## Initialise Workspace Variables
 
 ```
-    python -m graphrag.index --init --root ./ragtest
+    python -m graphrag.index --init --root ./data
 ```
 
 ## Running the Indexing pipeline
 
 ```
-    python -m graphrag.index --root ./ragtest
+    python -m graphrag.index --root ./data
 ```
 
 ## Running the Query Engine
 
 ```
     python -m graphrag.query \
-    --root ./ragtest \
+    --root ./data \
     --method global \
-    "What are the top themes in this story?"
+    "How many heat related accidents were there?"
 ```
 
 ```
     python -m graphrag.query \
-    --root ./ragtest \
+    --root ./data \
     --method local \
-    "Who is Scrooge, and what are his main relationships?"
+    "Which events included fire?"
 ```
