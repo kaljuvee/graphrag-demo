@@ -5,9 +5,9 @@
 ## Project Structure
 
 ```
-TBC
-
+/data/input
 ```
+contains the *.txt files as inputs.
 
 ## Virtual Environment and Dependencies
 
