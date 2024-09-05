@@ -17,14 +17,6 @@ contains the *.txt files as inputs.
     pip install -r requirements.txt
 ```
 
-## Running Indexer
-
-```
-    mkdir -p ./ragtest/input
-    curl https://www.gutenberg.org/cache/epub/24022/pg24022.txt > ./ragtest/input/book.txt
-```
-
-
 ## Initialise Workspace Variables
 
 ```
