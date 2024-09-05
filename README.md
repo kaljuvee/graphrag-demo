@@ -1,6 +1,6 @@
 # Overview
 
-- Test implementation of MMG in Flask
+- A demonstration how to use [Microsoft GraphRAG](https://github.com/microsoft/graphrag) for incident analysis.
 
 ## Project Structure
 
@@ -52,3 +52,7 @@ TBC
     --method local \
     "Which events included fire?"
 ```
+
+## References
+- [From Local to Global: A Graph RAG Approach to Query-Focused Summarization](https://arxiv.org/pdf/2404.16130) - by Microsoft Research
+- [Microsoft GraphRAG and Ollama: Code Your Way to Smarter Question Answering](https://blog.gopenai.com/microsoft-graphrag-and-ollama-code-your-way-to-smarter-question-answering-45a57cc5c38b)
