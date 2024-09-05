@@ -5,7 +5,7 @@
 ## Project Structure
 
 ```
-/data/input
+data/input
 ```
 contains the *.txt files as inputs.
 
