@@ -42,7 +42,7 @@ contains the *.txt files as inputs.
     python -m graphrag.query \
     --root ./data \
     --method local \
-    "Which events included fire?"
+    "How many heat related accidents were there?"
 ```
 
 ## References
