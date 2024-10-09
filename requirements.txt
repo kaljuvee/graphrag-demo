@@ -2,3 +2,8 @@ graphrag
 Faker
 sentence-transformers 
 faiss-cpu
+transformers
+torch
+openai
+python-dotenv
+numpy
