@@ -1,0 +1,61 @@
+Plant,Incident Type,Cause,Count
+Plant A,safety violation,Equipment,3
+Plant A,safety violation,Human error,2
+Plant A,electrical,Environment,2
+Plant A,electrical,Human error,1
+Plant A,injury,Environment,1
+Plant A,injury,Equipment,2
+Plant A,fire,Environment,1
+Plant A,fire,Equipment,1
+Plant A,near-miss,Environment,2
+Plant A,near-miss,Equipment,3
+Plant A,falling object,Environment,3
+Plant A,falling object,Equipment,2
+Plant A,heat exhaustion,Environment,2
+Plant A,heat exhaustion,Human error,1
+Plant A,slip,Human error,2
+Plant A,ventilation,Human error,1
+Plant A,ventilation,Environment,1
+Plant A,other,Human error,2
+Plant A,other,Environment,1
+Plant A,chemical spill,Human error,1
+Plant C,falling object,Human error,1
+Plant C,ventilation,Equipment,3
+Plant C,ventilation,Human error,2
+Plant C,ventilation,Environment,1
+Plant C,slip,Equipment,3
+Plant C,slip,Human error,2
+Plant C,near-miss,Environment,1
+Plant C,near-miss,Human error,1
+Plant C,other,Environment,1
+Plant C,other,Human error,2
+Plant C,heat exhaustion,Equipment,2
+Plant C,heat exhaustion,Environment,2
+Plant C,heat exhaustion,Human error,1
+Plant C,safety violation,Human error,2
+Plant C,safety violation,Environment,1
+Plant C,chemical spill,Equipment,1
+Plant C,chemical spill,Environment,1
+Plant C,electrical,Environment,3
+Plant C,electrical,Human error,1
+Plant C,electrical,Equipment,2
+Plant C,injury,Equipment,1
+Plant C,injury,Environment,1
+Plant B,heat exhaustion,Equipment,2
+Plant B,heat exhaustion,Human error,4
+Plant B,falling object,Equipment,1
+Plant B,ventilation,Human error,2
+Plant B,ventilation,Equipment,1
+Plant B,fire,Equipment,1
+Plant B,electrical,Environment,3
+Plant B,other,Environment,1
+Plant B,other,Human error,1
+Plant B,other,Equipment,1
+Plant B,near-miss,Human error,1
+Plant B,slip,Environment,1
+Plant B,slip,Equipment,2
+Plant B,slip,Human error,2
+Plant B,chemical spill,Human error,2
+Plant B,chemical spill,Environment,2
+Plant B,injury,Environment,2
+Plant B,safety violation,Human error,2

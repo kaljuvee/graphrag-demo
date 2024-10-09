@@ -3,23 +3,23 @@ encoding_model: cl100k_base
 skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
-  type: openai_chat # or azure_openai_chat
-  model: gpt-4-turbo-preview
-  model_supports_json: true # recommended if this is available for your model.
-  # max_tokens: 4000
-  # request_timeout: 180.0
-  # api_base: https://<instance>.openai.azure.com
-  # api_version: 2024-02-15-preview
-  # organization: <organization_id>
-  # deployment_name: <azure_model_deployment_name>
+  type: openai_chat # or azure_openai_chat #openai_chat
+  model: gpt-4o
+  #api_key: ${GRAPHRAG_API_KEY}
+  #type: azure_openai_embedding # or azure_openai_embedding #openai_embedding
+  #model: gpt-4o-mini
+  #api_base: https://mentastica-ai.openai.azure.com/
+  #api_version: '2024-07-18'
+  #organization: 5b01a07e-88f6-4901-98f5-0d687cb7a1b4
+  #deployment_name: mentastic-4o-mini
   # tokens_per_minute: 150_000 # set a leaky bucket throttle
   # requests_per_minute: 10_000 # set a leaky bucket throttle
   # max_retries: 10
   # max_retry_wait: 10.0
   # sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
   # concurrent_requests: 25 # the number of parallel inflight requests that may be made
-  # temperature: 0 # temperature for sampling
-  # top_p: 1 # top-p sampling
+  temperature: 0 # temperature for sampling
+  top_p: 0.1 # top-p sampling
   # n: 1 # Number of completions to generate
 
 parallelization:
@@ -34,12 +34,12 @@ embeddings:
   # target: required # or all
   llm:
     api_key: ${GRAPHRAG_API_KEY}
-    type: openai_embedding # or azure_openai_embedding
+    type: openai_embedding # or azure_openai_embedding #openai_embedding
     model: text-embedding-3-small
-    # api_base: https://<instance>.openai.azure.com
-    # api_version: 2024-02-15-preview
-    # organization: <organization_id>
-    # deployment_name: <azure_model_deployment_name>
+    #api_base: https://mentastica-ai.openai.azure.com/
+    #api_version: '2024-07-18'
+    #organization: 5b01a07e-88f6-4901-98f5-0d687cb7a1b4
+    #deployment_name: mentastic-4o-mini
     # tokens_per_minute: 150_000 # set a leaky bucket throttle
     # requests_per_minute: 10_000 # set a leaky bucket throttle
     # max_retries: 10

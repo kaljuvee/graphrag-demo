@@ -1,0 +1,14 @@
+{
+  "slip": 10,
+  "fire": 15,
+  "safety violation": 20,
+  "chemical spill": 8,
+  "injury": 12,
+  "near-miss": 18,
+  "electrical": 5,
+  "ventilation": 7,
+  "falling object": 9,
+  "heat exhaustion": 6,
+  "beehive": 3,
+  "scaffolding": 7
+}
