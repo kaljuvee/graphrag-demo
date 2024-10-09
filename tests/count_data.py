@@ -1,95 +1,70 @@
 import os
-import json
-import random
-from faker import Faker
+from collections import Counter
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
 
-# Initialize Faker
-fake = Faker()
-
-# Incident types with specified counts
-incident_types = {
-    'slip': 10,
-    'fire': 15,
-    'safety violation': 20,
-    'chemical spill': 8,
-    'injury': 12,
-    'near-miss': 18,
-    'electrical': 5,
-    'ventilation': 7,
-    'falling object': 9,
-    'heat exhaustion': 6,
-    'beehive': 3,
-    'scaffolding': 7
-}
-
-# Sample descriptions for variation
-incident_descriptions = [
-    "Employee reported dizziness and nausea in the packaging area. Investigation revealed a malfunctioning {incident_type} system. The area was evacuated and maintenance was called.",
-    "A {incident_type} alarm was triggered in the assembly line. Employees evacuated and emergency services responded. The issue was addressed promptly.",
-    "A worker in the production area experienced a {incident_type}, resulting in minor injuries. Safety protocols have been updated.",
-    "A near-miss {incident_type} incident was reported. A piece of equipment narrowly avoided colliding with a pedestrian in a blind spot.",
-    "Symptoms of {incident_type} were reported by a worker. The incident prompted a review of working conditions and safety measures."
-]
-
-def generate_synthetic_document(incident_type):
-    template = random.choice(incident_descriptions)
-    description = template.format(incident_type=incident_type)
-    return fake.sentence() + " " + description + " " + fake.sentence()
-
-def generate_documents(incident_types):
+def read_documents(input_folder):
     documents = []
     labels = []
-    for incident_type, count in incident_types.items():
-        for _ in range(count):
-            document_content = generate_synthetic_document(incident_type)
-            documents.append(document_content)
-            labels.append(incident_type)
+    for filename in os.listdir(input_folder):
+        if filename.endswith('.txt'):
+            with open(os.path.join(input_folder, filename), 'r') as file:
+                content = file.read().strip()
+                documents.append(content)
+                incident_type = content.split()[0].lower()
+                labels.append(incident_type)
     return documents, labels
 
-# Generate documents and labels
-documents, labels = generate_documents(incident_types)
+def create_index(documents):
+    model = SentenceTransformer('all-MiniLM-L6-v2')
+    embeddings = model.encode(documents)
+    dimension = embeddings.shape[1]
+    index = faiss.IndexFlatL2(dimension)
+    index.add(embeddings.astype('float32'))
+    return index, model
 
-# Initialize the sentence transformer model
-model = SentenceTransformer('all-MiniLM-L6-v2')
-
-# Embed the documents
-embeddings = model.encode(documents)
-
-# Create a FAISS index
-dimension = embeddings.shape[1]
-index = faiss.IndexFlatL2(dimension)
-index.add(embeddings.astype('float32'))
-
-def query_index(query, k=5):
+def query_index(index, model, query, k=5):
     query_vector = model.encode([query])
     distances, indices = index.search(query_vector.astype('float32'), k)
     return indices[0]
 
-def count_incidents(query):
-    indices = query_index(query, k=len(documents))
-    incident_counts = {incident_type: 0 for incident_type in incident_types}
-    for idx in indices:
-        incident_type = labels[idx]
-        incident_counts[incident_type] += 1
-    return incident_counts
+def count_incidents(index, model, labels, query):
+    indices = query_index(index, model, query, k=len(labels))
+    return Counter(labels[i] for i in indices)
 
-# Example usage
-query = "fire incident"
-result = count_incidents(query)
-print(f"Incident counts for query '{query}':")
-print(json.dumps(result, indent=2))
+def main():
+    input_folder = 'data/input'
+    documents, labels = read_documents(input_folder)
+    
+    if not documents:
+        print("No documents found in the input folder.")
+        return
 
-# Verify total counts
-total_counts = {incident_type: 0 for incident_type in incident_types}
-for label in labels:
-    total_counts[label] += 1
+    index, model = create_index(documents)
 
-print("\nTotal incident counts:")
-print(json.dumps(total_counts, indent=2))
+    # Get and print total counts
+    total_counts = Counter(labels)
+    print("Total incident counts:")
+    for incident_type, count in total_counts.items():
+        print(f"{incident_type}: {count}")
 
-# Compare with ground truth
-print("\nGround truth:")
-print(json.dumps(incident_types, indent=2))
+    # Example query
+    query = "fire incident"
+    result = count_incidents(index, model, labels, query)
+    print(f"\nIncident counts for query '{query}':")
+    for incident_type, count in result.items():
+        print(f"{incident_type}: {count}")
+
+    # Interactive query loop
+    while True:
+        user_query = input("\nEnter a query (or 'quit' to exit): ")
+        if user_query.lower() == 'quit':
+            break
+        query_result = count_incidents(index, model, labels, user_query)
+        print(f"Incident counts for query '{user_query}':")
+        for incident_type, count in query_result.items():
+            print(f"{incident_type}: {count}")
+
+if __name__ == "__main__":
+    main()
